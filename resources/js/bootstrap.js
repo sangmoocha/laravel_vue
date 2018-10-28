@@ -12,6 +12,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    // admin-lte 추가
+    require('admin-lte');
 } catch (e) {}
 
 /**

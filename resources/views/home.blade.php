@@ -1,4 +1,5 @@
-@extends('layouts.app')
+{{-- Layout master로 변경 --}}
+@extends('layouts.master')
 
 @section('content')
 <div class="container">
