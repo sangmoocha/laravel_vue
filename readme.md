@@ -52,7 +52,7 @@ Output
 
 Database 생성 : `CREATE SCHEMA 'databaseName' DEFAULT CHARACTER SET utf8;` <br/>
 user 생성 : `create user 'userID'@'%' identified by 'userpassword';` <br/>
-user 권한 :`grant all privileges on databaseName.* to 'userID'@'%';` <br/>
+user 권한 : `grant all privileges on databaseName.* to 'userID'@'%';` <br/>
 
 ### Nginx Server 
 설치 : `sudo apt install nginx`<br/>
