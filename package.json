@@ -23,6 +23,7 @@
         "@fortawesome/fontawesome-free": "^5.4.2",
         "admin-lte": "3.0.0-alpha.2",
         "bootstrap-vue": "^2.0.0-rc.11",
+        "vform": "^1.0.0",
         "vue-router": "^3.0.1"
     }
 }

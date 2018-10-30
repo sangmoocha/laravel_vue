@@ -18,9 +18,15 @@ window.Vue = require('vue');
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
-
+// vue-router
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
+
+// vform
+import { Form, HasError, AlertError } from 'vform';
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
 let routes = [
     { path: '/profile', component: require('./components/auth/ProfileComponent.vue') },
