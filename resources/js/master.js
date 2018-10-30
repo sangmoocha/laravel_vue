@@ -16,21 +16,23 @@ window.Vue = require('vue');
 
 // bootstrap-vue
 import BootstrapVue from 'bootstrap-vue'
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- * 
- * 다음으로, 새로운 Vue 애플리케이션 인스턴스를 생성하고 페이지에 첨부합니다. 
- * 그런 다음이 애플리케이션에 구성 요소를 추가하거나 고유 한 필요에 맞게 
- * JavaScript 스 캐 폴딩을 사용자 정의 할 수 있습니다.
- * 
- */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import VueRouter from 'vue-router'
+Vue.use(VueRouter);
+
+let routes = [
+    { path: '/profile', component: require('./components/auth/ProfileComponent.vue') },
+	{ path: '/users', component: require('./components/auth/UsersComponent.vue') },
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes // `routes: routes`의 줄임
+})
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
 });
