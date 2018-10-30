@@ -14,7 +14,7 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: orangered;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -23,6 +23,11 @@
 
             .full-height {
                 height: 100vh;
+                text-align: center;
+                background-image:url('/img/ivon.png');
+                background-repeat:no-repeat;
+                background-size: cover;
+                background-color: black;
             }
 
             .flex-center {
@@ -39,18 +44,28 @@
                 position: absolute;
                 right: 10px;
                 top: 18px;
+                
             }
-
+            
+            .top-left{
+                position: absolute;
+                left: 10px;
+                top: 18px;
+            }
+            
             .content {
-                text-align: center;
+                position: absolute;
+                left: 30%;
+                top: 25%;
+                writing-mode: tb-rl;
             }
 
             .title {
-                font-size: 84px;
+                font-size: 3rem;
             }
 
             .links > a {
-                color: #636b6f;
+                color:dimgrey;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -62,10 +77,21 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            @media (max-width: 768px) {
+                .top-left, .content {
+                    display: none;
+                }
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            <div class="top-left links">
+                <a href="https://laravel.com/docs" target="_sub">Laraval 문서</a>
+                <a href="https://laracasts.com" target="_sub">Laracasts</a>
+                <a href="https://laravel-news.com" target="_sub">News</a>
+                <a href="https://github.com/sangmoocha/laravel_vue" target="_sub">GitHub</a>
+            </div>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -79,16 +105,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <p>實習室 <br>
+                    Laravel Vue</p> 
                 </div>
             </div>
         </div>
