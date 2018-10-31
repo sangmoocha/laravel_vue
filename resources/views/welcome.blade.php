@@ -87,9 +87,6 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div class="top-left links">
-                <a href="https://laravel.com/docs" target="_sub">Laraval 문서</a>
-                <a href="https://laracasts.com" target="_sub">Laracasts</a>
-                <a href="https://laravel-news.com" target="_sub">News</a>
                 <a href="https://github.com/sangmoocha/laravel_vue" target="_sub">GitHub</a>
             </div>
             @if (Route::has('login'))

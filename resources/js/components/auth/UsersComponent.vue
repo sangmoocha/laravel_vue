@@ -12,7 +12,39 @@
 						</div>
 					</div>
                     <div class="card-body">
-                        작업중..
+                        <!-- DataTable -->
+						<b-table :items="items" :fields="usersfields" class="table-sm table-hover">
+							<template slot="index" slot-scope="data">
+								{{data.index + user.from}}
+							</template>
+
+							<template slot="etc" slot-scope="row">
+								<!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
+								<b-button size="sm" @click.stop="row.toggleDetails" class="mr-1">
+									{{ row.detailsShowing ? '닫기' : '보기'}}
+								</b-button>
+							</template>
+							<template slot="row-details" slot-scope="row">
+								<b-card>
+									<b-row class="mb-2">
+										<b-col>{{ row.item.etc }}</b-col>
+									</b-row>
+								</b-card>
+							</template>
+
+							<template slot="created_at" slot-scope="data" >
+								{{data.item.created_at}}
+							</template>
+							<template slot="action" slot-scope="data">
+								<b-link  href="#">
+									<i class="fa fa-edit blue"></i>
+								</b-link>
+								
+								<b-link  href="#">
+									<i class="fa fa-trash red"></i>
+								</b-link >
+							</template>
+						</b-table>
                     </div>
                 </div>
                 <!-- Modal Component -->
@@ -88,7 +120,47 @@
     export default {
         data () {
 			return {
-                // 모달 변수
+				// users row 값
+				items: [],
+				user:{},
+				// 테이블 컬럼 설정
+				usersfields: [
+					{
+						key: 'index',
+						label: '#',
+					},
+					{
+						key: 'name',
+						label: '성명',
+						sortable: true
+					},
+					{
+						key: 'email',
+						label: '이메일',
+						sortable: true
+					},
+					{
+						key: 'authority',
+						label: '권한',
+						sortable: true,
+					},
+					{
+						key: 'etc',
+						label: '메모',
+					},
+					{
+						key: 'created_at',
+						label: '등록일',
+						sortable: true,
+					},
+					{
+						key: 'action',
+						label: '',
+						// Variant applies to the whole column, including the header and footer
+						// variant: 'danger'
+					},
+				],
+				// 모달 변수
 				form: new Form({
 					id        : '',
 					name      : '',
@@ -109,6 +181,14 @@
 			}
 		},
         methods: {
+			loadUsers(){
+				axios.get("api/user")
+					 .then(({data}) => { 
+					   this.items = data.data,
+					   this.user = data
+					  });
+				
+			},
             focusMyElement (e) {
 				this.$refs.focusThis.focus()
 		    },
@@ -117,6 +197,8 @@
 				evt.preventDefault();
     		},
         },
-        
+        created() {
+			this.loadUsers();
+		},
     }
 </script>
