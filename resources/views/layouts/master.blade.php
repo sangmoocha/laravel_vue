@@ -43,6 +43,11 @@
 			</form>
 			{{-- Right navbar links --}}
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item mr-3">
+					<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+						<i class="fa fa-th-large"></i>
+					</a>
+				</li>
 				<li>
 					<button type="button" 
 							class="btn btn-outline-success orangered"
@@ -154,6 +159,13 @@
 				</div>
 			</div>
 		</div>
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark ">
+			<!-- Control sidebar content goes here -->
+			<div class="p-1">
+				<aplayer-component></aplayer-component>
+			</div>
+		</aside>
 	</div>
 	{{-- javascript --}}
 	<script src="/js/master.js"></script>

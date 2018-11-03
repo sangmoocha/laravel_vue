@@ -39,6 +39,7 @@ Vue.filter('upText', function(text){
     return moment(created).format('ll');
 });
 
+Vue.component('aplayer-component', require('./components/util/PlayerComponent.vue'));
 // vue router
 let routes = [
     { path: '/profile', component: require('./components/auth/ProfileComponent.vue') },
