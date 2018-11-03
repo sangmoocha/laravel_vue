@@ -9,7 +9,7 @@
 	{{-- CSRF Token --}}
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>Laravel 5.7 Learning</title>
+	<title>Laravel Vue Learning</title>
 
 	<link rel="stylesheet" href="/css/master.css">
 	{{-- Theme style --}}
@@ -55,7 +55,6 @@
 						@csrf
 					</form>
 				</li>
-
 			</ul>
 		</nav>
 		{{-- /.navbar --}}
@@ -120,6 +119,12 @@
 									<a class="nav-link" href="/phpmyadmin" target="_sub">
 										<i class="fas fa-database"></i>
 										<p>Database</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/sangmoocha/laravel_vue" target="_sub">
+										<i class="fab fa-github"></i>
+										<p>소스 보기</p>
 									</a>
 								</li>
 							</ul>

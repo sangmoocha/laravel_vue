@@ -1,53 +1,75 @@
+<style>
+	.memo {
+		/* memo 자동 줄바꿈 */
+		word-wrap: break-word; /* Internet Explorer 5.5+ */
+		white-space: pre-wrap; /* css-3 */
+		white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+		white-space: -pre-wrap; /* Opera 4-6 */
+		white-space: -o-pre-wrap; /* Opera 7 */
+		word-break:break-all;
+	}
+</style>
 <template>
-    <div class="container">
-        <div class="row justify-content-center  pt-2">
+    <div class="container pt-3">
+        <div class="row justify-content-center pt-2">
             <div class="col-md-12">
-                <div class="card card-default">
+                <div class="card">
                     <div class="card-header">
 						사용자 관리
 						<div class="card-tools col text-right pt-1">
-							<button class="btn btn-primary btn-sm" v-b-modal.modal-center>
+							<button class="btn btn-primary btn-sm" @click="addUser()">
 								<i class="fas fa-user-plus"></i>
 							</button>
 						</div>
 					</div>
-                    <div class="card-body">
-                        <!-- DataTable -->
+					<div class="card-body">
+						
 						<b-table :items="items" :fields="usersfields" class="table-sm table-hover">
 							<template slot="index" slot-scope="data">
 								{{data.index + user.from}}
 							</template>
 
+							<template slot="authority" slot-scope="data">
+								{{ data.item.authority }}
+							</template>
+
 							<template slot="etc" slot-scope="row">
 								<!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
-								<b-button size="sm" @click.stop="row.toggleDetails" class="mr-1">
+								<b-button size="sm" @click.stop="row.toggleDetails" class="mr-1" :hidden="isMemo(row.item.etc)">
 									{{ row.detailsShowing ? '닫기' : '보기'}}
 								</b-button>
 							</template>
+
 							<template slot="row-details" slot-scope="row">
 								<b-card>
 									<b-row class="mb-2">
-										<b-col>{{ row.item.etc }}</b-col>
+										<b-col class="memo">{{ row.item.etc }}</b-col>
 									</b-row>
 								</b-card>
 							</template>
 
-							<template slot="created_at" slot-scope="data" >
-								{{data.item.created_at}}
+							<template slot="created_at" slot-scope="data">
+								{{data.item.created_at | myDate}}
 							</template>
+							
 							<template slot="action" slot-scope="data">
-								<b-link  href="#">
+								<b-link  href="#" @click="editUser(data.item)">
 									<i class="fa fa-edit blue"></i>
 								</b-link>
 								
-								<b-link  href="#">
+								<b-link  href="#" @click="deleteUser(data.item.id)">
 									<i class="fa fa-trash red"></i>
 								</b-link >
 							</template>
 						</b-table>
-                    </div>
-                </div>
-                <!-- Modal Component -->
+
+					</div>
+					<div class="card-footer text-muted text-center">
+						작업중...
+					</div>
+				</div>
+				
+				<!-- Modal Component -->
 				<b-modal 
 					id           = "modal-center" 
 					button-size  = "sm"
@@ -55,7 +77,7 @@
 					@ok          = "handleOk"
 					@shown       = "focusMyElement"
 					:title       = "form.name"
-					ok-title     = "추가"
+					:ok-title     = "btnTitle"
 					cancel-title = "취소"
 					centered 
 				>
@@ -67,7 +89,7 @@
 											  ref="focusThis" 
 											  type="text"
 											  name="name"
-											  maxlength="10"
+											  maxlength="20"
 											  :class="{ 'is-invalid': form.errors.has('name') }"
 											  ></b-form-input>
 								<has-error :form="form" field="name"></has-error>
@@ -118,7 +140,7 @@
 
 <script>
     export default {
-        data () {
+		data () {
 			return {
 				// users row 값
 				items: [],
@@ -147,6 +169,7 @@
 					{
 						key: 'etc',
 						label: '메모',
+						class: 'memo',
 					},
 					{
 						key: 'created_at',
@@ -160,6 +183,9 @@
 						// variant: 'danger'
 					},
 				],
+				// 
+				editMode: false,
+				btnTitle: '',
 				// 모달 변수
 				form: new Form({
 					id        : '',
@@ -169,36 +195,76 @@
 					authority : 'guest',
 					etc       : '',
 				}),
-
 				//select options 변수
 				auth: [
 					{ value: 'guest', text: '손님' },
-					{ value: 'user', text: '사용자'},
+					{ value: 'user', text: '사용자' },
 					{ value: 'manager', text: '관리자' },
 					{ value: 'developer', text: '개발자', disabled: true},
 					{ value: 'admin', text: '운영자', disabled: true}
-				]
+				],
 			}
-		},
-        methods: {
+		}, 
+		methods: {
+			isMemo(item){
+				if( item == null){
+					return true;
+				}else{
+					return false;
+				}
+			},
 			loadUsers(){
 				axios.get("api/user")
 					 .then(({data}) => { 
 					   this.items = data.data,
 					   this.user = data
 					  });
-				
 			},
-            focusMyElement (e) {
-				this.$refs.focusThis.focus()
+			addUser(){
+				this.editMode = false;
+				this.btnTitle = "추가";
+				this.form.reset();		
+				this.$refs.modal.show();
+			},
+			createUser(){
+				console.log("createUser 호출");
+				this.form.post('api/user')
+					.then(()=>{
+						this.$refs.modal.hide()
+					});
+			},
+			editUser(item){
+				this.editMode = true;
+				this.btnTitle = "변경";
+				this.form.reset();		
+				this.$refs.modal.show();
+				this.form.fill (item);
+			},
+			updateUser(){
+				console.log("변경호출");
+				this.form.put('api/user/'+this.form.id)
+					.then(() => {
+						// success
+						this.$refs.modal.hide()
+					})
+					.catch(() => {
+					
+					})
+			},
+			deleteUser(userID){
+				console.log("삭제호출 : " + userID);
+			},
+			focusMyElement (e) {
+				this.$refs.focusThis.focus();
 		    },
 			handleOk (evt) {
 				// Prevent modal from closing
 				evt.preventDefault();
+				this.editMode ? this.updateUser() : this.createUser();
     		},
-        },
-        created() {
+		},
+		created() {
 			this.loadUsers();
 		},
-    }
+	}
 </script>

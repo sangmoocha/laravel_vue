@@ -303,8 +303,22 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 ### NodeJS
 ```
+Node.js v10.x:
+# Using Ubuntu
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Using Debian, as root
+curl -sL https://deb.nodesource.com/setup_10.x | bash -
+apt-get install -y nodejs
+Node.js v8.x:
+# Using Ubuntu
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
+
+# Using Debian, as root
+curl -sL https://deb.nodesource.com/setup_8.x | bash -
+apt-get install -y nodejs
 ```
 ### NPM
 ```
@@ -381,10 +395,12 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 `sudo systemctl restart nginx`<br/>
 
 ### PhpMyAdmin
-`sudo apt-get install phpmyadmin php-gettext` <br/>
-처음질문은 아무것도 선택하지 않고 <OK>클릭하고, 다음 <아니오> 선택하고 나온다.
-
-
+```
+sudo apt install phpmyadmin php-gettext
+위 명령어로 설치시 PHP7.2와 호환성에 문제가 있는 하위 버젼이 설치되므로 
+composer를 통한 상의 버전을 직접 설치하는 것을 권장합니다.
+```
+`composer create-project phpmyadmin/phpmyadmin` <br/>
+`sudo mv phpmyadmin /usr/share/phpmyadmin`<br/>
 `cd /var/www/example.com/html/public` <br/>
 `sudo ln -s /usr/share/phpmyadmin /var/www/example.com/html/public`
-

@@ -11,6 +11,10 @@ return [
     | the validator class. Some of these rules have multiple versions such
     | as the size rules. Feel free to tweak each of these messages here.
     |
+    | 다음 언어 행에는 유효성 검사기 클래스에서 사용되는 기본 오류 메시지가 
+    | 들어 있습니다. 이러한 규칙 중 일부는 크기 규칙과 같은 여러 버전이 있습니다.
+    | 이 메시지 각각을 여기에서 조정할 수 있습니다.
+    |
     */
 
     'accepted'             => 'The :attribute must be accepted.',
@@ -93,7 +97,7 @@ return [
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field is required.',
+    'required'             => ':attribute 입력란은 필수 항목입니다.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
