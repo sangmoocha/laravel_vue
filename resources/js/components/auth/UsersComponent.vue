@@ -9,6 +9,7 @@
 		word-break:break-all;
 	}
 </style>
+
 <template>
     <div class="container pt-3">
         <div class="row justify-content-center pt-2">
@@ -24,7 +25,7 @@
 					</div>
 					<div class="card-body">
 						
-						<b-table :items="items" :fields="usersfields" class="table-sm table-hover">
+						<b-table :items="items" :fields="usersfields" class="table-sm table-hover table-striped">
 							<template slot="index" slot-scope="data">
 								{{data.index + user.from}}
 							</template>
@@ -35,7 +36,7 @@
 
 							<template slot="etc" slot-scope="row">
 								<!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
-								<b-button size="sm" @click.stop="row.toggleDetails" class="mr-1" :hidden="isMemo(row.item.etc)">
+								<b-button size="sm" @click.stop="row.toggleDetails" variant="outline-secondary" :hidden="isMemo(row.item.etc)">
 									{{ row.detailsShowing ? '닫기' : '보기'}}
 								</b-button>
 							</template>
@@ -75,7 +76,7 @@
 					button-size  = "sm"
 					ref          = "modal"
 					@ok          = "handleOk"
-					@shown       = "focusMyElement"
+					
 					:title       = "form.name"
 					:ok-title     = "btnTitle"
 					cancel-title = "취소"
@@ -86,7 +87,7 @@
 							<b-input-group prepend='<i class="fas fa-user-tie"></i>' class="my-1">
 								<b-form-input v-model="form.name" 
 											  placeholder="Enter your name" 
-											  ref="focusThis" 
+											  autofocus 
 											  type="text"
 											  name="name"
 											  maxlength="20"
@@ -139,6 +140,15 @@
 </template>
 
 <script>
+	// moment
+	import moment from 'moment';
+	moment.locale('ko');
+
+	Vue.filter('myDate',function(created){
+		// return moment(created).format('MMMM Do YYYY, h:mm:ss a');
+		return moment(created).format('ll');
+	});
+
     export default {
 		data () {
 			return {
@@ -186,14 +196,17 @@
 				// 
 				editMode: false,
 				btnTitle: '',
+				repassword: '',
 				// 모달 변수
 				form: new Form({
 					id        : '',
 					name      : '',
 					email     : '',
-					password  : '',
+					password  : null,
 					authority : 'guest',
+					photo     : "user.jpg",
 					etc       : '',
+					pwd       : null,
 				}),
 				//select options 변수
 				auth: [
@@ -203,11 +216,12 @@
 					{ value: 'developer', text: '개발자', disabled: true},
 					{ value: 'admin', text: '운영자', disabled: true}
 				],
+				
 			}
 		}, 
 		methods: {
 			isMemo(item){
-				if( item == null){
+				if( item == null){	
 					return true;
 				}else{
 					return false;
@@ -238,13 +252,20 @@
 				this.btnTitle = "변경";
 				this.form.reset();		
 				this.$refs.modal.show();
+				this.repassword = item.password;
 				this.form.fill (item);
 			},
 			updateUser(){
-				console.log("변경호출");
+				
+				if(this.repassword===this.form.password){
+					this.form.pwd = true;
+				} else {
+					this.form.pwd = null;
+				}
 				this.form.put('api/user/'+this.form.id)
 					.then(() => {
 						// success
+						console.log("변경호출");
 						this.$refs.modal.hide()
 					})
 					.catch(() => {
@@ -252,11 +273,14 @@
 					})
 			},
 			deleteUser(userID){
-				console.log("삭제호출 : " + userID);
-			},
-			focusMyElement (e) {
-				this.$refs.focusThis.focus();
-		    },
+				
+				this.form.delete('api/user/'+userID)
+					.then(() => {
+						console.log("삭제 : " + userID);
+					}).catch(()=>{
+					
+					})
+			},			
 			handleOk (evt) {
 				// Prevent modal from closing
 				evt.preventDefault();
@@ -265,6 +289,6 @@
 		},
 		created() {
 			this.loadUsers();
-		},
+		}
 	}
 </script>

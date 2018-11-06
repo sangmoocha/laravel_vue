@@ -5,4 +5,12 @@
 @import '~admin-lte/dist/css/adminlte.css';
 
 // bootstrap-vue
-@import '~bootstrap-vue/dist/bootstrap-vue.css'
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+
+.control-sidebar, .control-sidebar:before {
+    width: 400px;
+    right: -400px;
+    bottom: 0;
+    -webkit-transition: right 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out;
+}

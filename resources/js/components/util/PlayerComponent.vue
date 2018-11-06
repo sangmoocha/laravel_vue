@@ -1,44 +1,63 @@
 <template>
-    	<div class="row justify-content-center">
-		<div class="col-md-12">
-			<aplayer :audio="audio" :lrc-type="3" />
-		</div>
-	</div>
-
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <aplayer :audio="audio" :lrc-type="3" />
+    </div>
+  </div>
 </template>
 
 <script>
-import APlayer from '@moefe/vue-aplayer';
+  import APlayer from '@moefe/vue-aplayer';
+  Vue.use(APlayer);
 
-Vue.use(APlayer);
-
-export default {
-  data() {
-    return {
-      audio: [
-        {
-          name: '호랑풍류가',
-          artist: '시드노벨',
-          url: 'http://roche.run.goorm.io/mp3/TigerMerryMelody.mp3',
-          cover: 'https://s-sg.tc.smule.com/sf/s30/arr/52/18/c893c7ff-5a3a-4e0a-b740-c5cb35409241_256.jpg?param=300y300', // prettier-ignore
-          lrc: 'http://roche.run.goorm.io/lrc/TigerMerryMelody.lrc',
-        },
-        {
-          name: 'Mermaid girl (Extended RRver.)',
-          artist: '森永真由美',
-          url: 'http://pdacsgxq7.bkt.clouddn.com/mp3/mermaidgirl.mp3',
-          cover: 'http://p1.music.126.net/xXxBuZksld5HtovQxI1D0A==/3227066630258578.jpg?param=300y300', // prettier-ignore
-          lrc: 'http://pdacsgxq7.bkt.clouddn.com/lrc/mermaidgirl.lrc',
-        },
-        {
-          name: 'ヒビカセ',
-          artist: 'れをる',
-          url: 'http://pdacsgxq7.bkt.clouddn.com/mp3/hibikase.mp3',
-          cover: 'http://p1.music.126.net/cZPx3peGTuWEI_GaZB5CDg==/8892850045794893.jpg?param=300y300', // prettier-ignore
-          lrc: 'http://pdacsgxq7.bkt.clouddn.com/lrc/hibikase.lrc',
-        },
-      ],
-    };
-  },
-};
+  export default {
+    data() {
+      return {
+        audio: [
+          {
+            name: '비행운',
+            artist: '문문',
+            url: 'https://firebasestorage.googleapis.com/v0/b/fn-ivon.appspot.com/o/%EB%B9%84%ED%96%89%EC%9A%B4.mp3?alt=media&token=4d242cf6-8b44-402f-9ba0-2b73e828b0bb',
+            cover: 'https://t1.daumcdn.net/cfile/tistory/9902EB335A1F8F9E20?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/비행운.lrc',
+          },
+          {
+            name: '가장 보통의 존재',
+            artist: 'IU',
+            url: 'https://firebasestorage.googleapis.com/v0/b/fn-ivon.appspot.com/o/%EA%B0%80%EC%9E%A5%20%EB%B3%B4%ED%86%B5%EC%9D%98%20%EC%A1%B4%EC%9E%AC.mp3?alt=media&token=2399ea8e-e4f1-440b-8304-5f1f98e5ea35',
+            cover: 'https://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile23.uf.tistory.com%2Fimage%2F215A8940565875AB252E5E?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/가장보통의존재.lrc',
+          },
+          {
+            name: '호랑풍류가',
+            artist: '설레임 에디션',
+            url: 'https://firebasestorage.googleapis.com/v0/b/fn-ivon.appspot.com/o/%ED%98%B8%EB%9E%91%ED%92%8D%EB%A5%98%EA%B0%80.mp3?alt=media&token=f8a55b23-b842-44e1-b560-a00dee17d0f6',
+            cover: 'https://s3.namuwikiusercontent.com/s/dd1b5806c71c0a29708aacbed1246fdda56245493e6e2b2a9a607edbd0e608007661cd800abc57c6db9ec7c2446d32fa39799de587fdf3d16be9628c7ff33a212b509bd8af91ed39de6ef6f6dd5dcc3a6dfd620aa05f885fc3d7b00acb9999d5?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/호랑풍류가.lrc',
+          },
+          {
+            name: '호랑수월가',
+            artist: 'Narae',
+            url: 'https://firebasestorage.googleapis.com/v0/b/fn-ivon.appspot.com/o/%ED%98%B8%EB%9E%91%EC%88%98%EC%9B%94%EA%B0%80.mp3?alt=media&token=7524682a-7c1d-42b6-8986-9e74b7a8fb44',
+            cover: 'https://s3.namuwikiusercontent.com/s/dd1b5806c71c0a29708aacbed1246fdda56245493e6e2b2a9a607edbd0e608007661cd800abc57c6db9ec7c2446d32fa39799de587fdf3d16be9628c7ff33a212b509bd8af91ed39de6ef6f6dd5dcc3a6dfd620aa05f885fc3d7b00acb9999d5?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/호랑수월가.lrc',
+          },
+          {
+            name: 'Memory(feat. Bizzy)',
+            artist: '이효리',
+            url: 'https://firebasestorage.googleapis.com/v0/b/vue-firebase-learning-33ce7.appspot.com/o/%EC%9D%B4%ED%9A%A8%EB%A6%AC%20-%20Memory%20(feat.%20Bizzy).mp3?alt=media&token=6bde524e-fb24-41d3-ab78-1b5eb87b38a7',
+            cover: 'http://image.yes24.com/blogimage/blog/c/u/culturist/2010-06-21_14;17;48.jpg?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/memory.lrc',
+          },
+          {
+            name: '레티아리이',
+            artist: 'Kevin M./SungKyu Hong',
+            url: 'https://firebasestorage.googleapis.com/v0/b/fn-ivon.appspot.com/o/%5BReveal%5D%20%EB%A0%88%ED%8B%B0%EC%95%84%EB%A6%AC%EC%9D%B4%20MV%20RA%20Reina%20(by.%20Kevin)%20-%20TOS%20%ED%8A%B8%EB%A6%AC%EC%98%A4%EB%B8%8C%EC%84%B8%EC%9D%B4%EB%B9%84%EC%96%B4.mp3?alt=media&token=973edce8-0a7e-48cc-bf2d-8a59046a0702',
+            cover: 'https://i.ytimg.com/vi/B_2odAdgmS8/mqdefault.jpg?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/Reveal.lrc',
+          },
+        ],
+      };
+    },
+  };
 </script>

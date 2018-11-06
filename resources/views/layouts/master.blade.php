@@ -45,17 +45,16 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item mr-3">
 					<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-						<i class="fa fa-th-large"></i>
+						<i class="fab fa-google-play indigo"></i>
 					</a>
 				</li>
-				<li>
-					<button type="button" 
-							class="btn btn-outline-success orangered"
-							onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">
-						<i class="fas fa-power-off red"></i>
-						
-					</button>
+				<li class="nav-item">
+					<a 	class="nav-link"
+						href="#"
+						onclick="event.preventDefault();
+             			document.getElementById('logout-form').submit();">
+						<i class="fas fa-power-off orangered"></i>
+					</a>
 					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 						@csrf
 					</form>
@@ -77,7 +76,7 @@
 				{{-- Sidebar user panel (optional) --}}
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 					<div class="image">
-						<img src="img/{{ Auth::user()->photo }}" class="img-circle" alt="User Image">
+						<img src="img/{{ Auth::user()->authority.'.png' }}" class="img-circle" alt="User Image">
 					</div>
 					<div class="info">
 						<router-link to="/profile" class="d-block align-middle">{{ Auth::user()->name }}</router-link>
@@ -162,7 +161,10 @@
 		<!-- Control Sidebar -->
 		<aside class="control-sidebar control-sidebar-dark ">
 			<!-- Control sidebar content goes here -->
-			<div class="p-1">
+			<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+				<i class="fas fa-times"></i>
+			</a>
+			<div class="p-0">
 				<aplayer-component></aplayer-component>
 			</div>
 		</aside>

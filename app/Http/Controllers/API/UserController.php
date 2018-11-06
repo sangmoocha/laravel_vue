@@ -11,7 +11,7 @@ use App\User;
 
 class UserController extends Controller
 {
-    /**
+	/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return User::latest()->paginate(50);  
+        return User::latest()->paginate(10);
     }
 
     /**
@@ -66,18 +66,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $user = user::findOrfail($id);
-
+        $user = User::findOrFail($id);
         $this->validate($request,[
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|min:6',
             'etc' => 'max:191',
         ]);
-
+		if(empty($request->pwd)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
         $user->update($request->all());
-        return ['massage' => 'Update user Success'];
+        return ['message' => $request->pwd];
     }
 
     /**
