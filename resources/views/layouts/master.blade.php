@@ -44,13 +44,22 @@
 			{{-- Right navbar links --}}
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item mr-3">
-					<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+					<a  class="nav-link" 
+						data-toggle="tooltip" 
+						title="음악감상" 
+						data-placement="bottom" 
+						data-widget="control-sidebar" 
+						data-slide="true" 
+						href="#">
 						<i class="fab fa-google-play indigo"></i>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a 	class="nav-link"
 						href="#"
+						data-toggle="tooltip" 
+						title="로그아웃" 
+						data-placement="bottom" 
 						onclick="event.preventDefault();
              			document.getElementById('logout-form').submit();">
 						<i class="fas fa-power-off orangered"></i>
@@ -161,9 +170,19 @@
 		<!-- Control Sidebar -->
 		<aside class="control-sidebar control-sidebar-dark ">
 			<!-- Control sidebar content goes here -->
-			<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-				<i class="fas fa-times"></i>
-			</a>
+			<div>
+				<ul class="nav">
+					<li class="nav-item">
+						<a class="nav-link navbar-brand" data-widget="control-sidebar" data-slide="true" href="#">
+							<i class="fas fa-times"></i>
+						</a>
+					</li>
+					<li class="nav-item text-center w-75">
+						<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">APlayer</a>
+					</li>
+				</ul>
+			</div>
+			
 			<div class="p-0">
 				<aplayer-component></aplayer-component>
 			</div>

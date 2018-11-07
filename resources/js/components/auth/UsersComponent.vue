@@ -8,6 +8,13 @@
 		white-space: -o-pre-wrap; /* Opera 7 */
 		word-break:break-all;
 	}
+	.thead-dark tr th{
+		padding: 10px;
+		white-space:nowrap;
+	}
+	.nowrap{
+		white-space:nowrap;
+	}
 </style>
 
 <template>
@@ -18,25 +25,33 @@
                     <div class="card-header">
 						사용자 관리
 						<div class="card-tools col text-right pt-1">
-							<button class="btn btn-primary btn-sm" @click="addUser()">
+							<b-btn  variant="btn btn-primary btn-sm" 
+									v-b-popover.hover.Left="'사용자 추가'"
+									@click="addUser()">
 								<i class="fas fa-user-plus"></i>
-							</button>
+							</b-btn>
 						</div>
 					</div>
-					<div class="card-body">
-						
-						<b-table :items="items" :fields="usersfields" class="table-sm table-hover table-striped">
+					<div class="card-body p-0">
+						<b-table :items="items" 
+								 :fields="usersfields" 
+								 hover responsive
+								 head-variant="dark" 
+								 foot-variant="light">
 							<template slot="index" slot-scope="data">
 								{{data.index + user.from}}
 							</template>
 
 							<template slot="authority" slot-scope="data">
-								{{ data.item.authority }}
+								{{ auth(data.item.authority) }}
 							</template>
 
 							<template slot="etc" slot-scope="row">
 								<!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
-								<b-button size="sm" @click.stop="row.toggleDetails" variant="outline-secondary" :hidden="isMemo(row.item.etc)">
+								<b-button size="sm" 
+										  @click.stop="row.toggleDetails" 
+										  variant="link"
+										  :hidden="isMemo(row.item.etc)">
 									{{ row.detailsShowing ? '닫기' : '보기'}}
 								</b-button>
 							</template>
@@ -53,12 +68,12 @@
 								{{data.item.created_at | myDate}}
 							</template>
 							
-							<template slot="action" slot-scope="data">
-								<b-link  href="#" @click="editUser(data.item)">
+							<template slot="active" slot-scope="data">
+								<b-link v-b-popover.hover="'편집'" href="#" @click="editUser(data.item)">
 									<i class="fa fa-edit blue"></i>
 								</b-link>
-								
-								<b-link  href="#" @click="deleteUser(data.item.id)">
+								/
+								<b-link  href="#" v-b-popover.hover="'삭제'" @click="deleteUser(data.item.id)">
 									<i class="fa fa-trash red"></i>
 								</b-link >
 							</template>
@@ -76,9 +91,8 @@
 					button-size  = "sm"
 					ref          = "modal"
 					@ok          = "handleOk"
-					
 					:title       = "form.name"
-					:ok-title     = "btnTitle"
+					:ok-title    = "btnTitle"
 					cancel-title = "취소"
 					centered 
 				>
@@ -115,7 +129,7 @@
 								<b-form-select v-model="form.authority" 
 											   :class="{ 'is-invalid': form.errors.has('authority') }"
 											   name="authority"
-											   :options="auth"></b-form-select>
+											   :options="Authorities"></b-form-select>
 								<has-error :form="form" field="authority"></has-error>
 							</b-input-group>
 							<b-input-group prepend='<i class="fas fa-archive"></i>' class="my-1">
@@ -149,6 +163,10 @@
 		return moment(created).format('ll');
 	});
 
+	// Vue.filter('auth', function(Authoritie){
+		
+	// });
+
     export default {
 		data () {
 			return {
@@ -164,17 +182,19 @@
 					{
 						key: 'name',
 						label: '성명',
-						sortable: true
+						sortable: true,
+						class: "nowrap",
 					},
 					{
 						key: 'email',
 						label: '이메일',
-						sortable: true
+						sortable: true,
 					},
 					{
 						key: 'authority',
-						label: '권한',
+						label: '등급',
 						sortable: true,
+						class: "nowrap",
 					},
 					{
 						key: 'etc',
@@ -185,10 +205,12 @@
 						key: 'created_at',
 						label: '등록일',
 						sortable: true,
+						class: "nowrap",
 					},
 					{
-						key: 'action',
-						label: '',
+						key: 'active',
+						label: '수정/삭제',
+						class: "nowrap",
 						// Variant applies to the whole column, including the header and footer
 						// variant: 'danger'
 					},
@@ -209,17 +231,21 @@
 					pwd       : null,
 				}),
 				//select options 변수
-				auth: [
+				Authorities: [
 					{ value: 'guest', text: '손님' },
 					{ value: 'user', text: '사용자' },
 					{ value: 'manager', text: '관리자' },
-					{ value: 'developer', text: '개발자', disabled: true},
-					{ value: 'admin', text: '운영자', disabled: true}
+					{ value: 'developer', text: '개발자'},
+					{ value: 'admin', text: '운영자'}
 				],
 				
 			}
 		}, 
 		methods: {
+			auth(Authoritie){
+				var auth = this.Authorities.filter(function (rating) { return rating.value == Authoritie });
+				return auth[0].text;
+			},
 			isMemo(item){
 				if( item == null){	
 					return true;
