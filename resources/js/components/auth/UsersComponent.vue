@@ -9,11 +9,13 @@
 		word-break:break-all;
 	}
 	.thead-dark tr th{
-		padding: 10px;
 		white-space:nowrap;
 	}
 	.nowrap{
 		white-space:nowrap;
+	}
+	.table {
+		margin-bottom: 0rem;
 	}
 </style>
 
@@ -52,7 +54,7 @@
 										  @click.stop="row.toggleDetails" 
 										  variant="link"
 										  :hidden="isMemo(row.item.etc)">
-									{{ row.detailsShowing ? '닫기' : '보기'}}
+									{{ row.detailsShowing ? '닫기' : '보기' }}
 								</b-button>
 							</template>
 
@@ -163,10 +165,6 @@
 		return moment(created).format('ll');
 	});
 
-	// Vue.filter('auth', function(Authoritie){
-		
-	// });
-
     export default {
 		data () {
 			return {
@@ -243,13 +241,15 @@
 		}, 
 		methods: {
 			auth(Authoritie){
-				var auth = this.Authorities.filter(function (rating) { return rating.value == Authoritie });
+				var auth = this.Authorities.filter(function (rating) { 
+						return rating.value == Authoritie 
+					});
 				return auth[0].text;
 			},
 			isMemo(item){
-				if( item == null){	
+				if( item == null) {	
 					return true;
-				}else{
+				} else {
 					return false;
 				}
 			},
@@ -267,10 +267,13 @@
 				this.$refs.modal.show();
 			},
 			createUser(){
-				console.log("createUser 호출");
+				this.$Progress.start();
 				this.form.post('api/user')
-					.then(()=>{
-						this.$refs.modal.hide()
+					.then((response)=>{
+						this.$refs.modal.hide();
+						this.$Progress.finish();
+					}, (response) => {
+						this.$Progress.fail()
 					});
 			},
 			editUser(item){
@@ -282,7 +285,6 @@
 				this.form.fill (item);
 			},
 			updateUser(){
-				
 				if(this.repassword===this.form.password){
 					this.form.pwd = true;
 				} else {
@@ -299,7 +301,6 @@
 					})
 			},
 			deleteUser(userID){
-				
 				this.form.delete('api/user/'+userID)
 					.then(() => {
 						console.log("삭제 : " + userID);

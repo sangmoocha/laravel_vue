@@ -46,7 +46,7 @@
             name: 'Memory(feat. Bizzy)',
             artist: '이효리',
             url: 'https://firebasestorage.googleapis.com/v0/b/vue-firebase-learning-33ce7.appspot.com/o/%EC%9D%B4%ED%9A%A8%EB%A6%AC%20-%20Memory%20(feat.%20Bizzy).mp3?alt=media&token=6bde524e-fb24-41d3-ab78-1b5eb87b38a7',
-            cover: 'http://image.yes24.com/blogimage/blog/c/u/culturist/2010-06-21_14;17;48.jpg?param=300y300', // prettier-ignore
+            cover: 'https://upload.wikimedia.org/wikipedia/ko/6/6c/%EC%9D%B4%ED%9A%A8%EB%A6%AC_-_H-Logic.jpg?param=300y300', // prettier-ignore
             lrc: 'https://ivon.gonetis.com/lrc/memory.lrc',
           },
           {

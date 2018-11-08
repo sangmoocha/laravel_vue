@@ -164,12 +164,14 @@
 				<div class="container-fluid">
 					{{-- vue-router --}}
 					<router-view></router-view>
+					{{-- set progressbar --}}
+					<vue-progress-bar></vue-progress-bar>
 				</div>
 			</div>
 		</div>
-		<!-- Control Sidebar -->
+		{{-- Control Sidebar --}}
 		<aside class="control-sidebar control-sidebar-dark ">
-			<!-- Control sidebar content goes here -->
+			{{-- Control sidebar content goes here --}}
 			<div>
 				<ul class="nav">
 					<li class="nav-item">
