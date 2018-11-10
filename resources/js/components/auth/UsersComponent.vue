@@ -8,13 +8,10 @@
 		white-space: -o-pre-wrap; /* Opera 7 */
 		word-break:break-all;
 	}
-	.thead-dark tr th{
+	.thead-dark tr th, .nowrap{
 		white-space:nowrap;
 	}
-	.nowrap{
-		white-space:nowrap;
-	}
-	.table {
+	.table, .pagination {
 		margin-bottom: 0rem;
 	}
 </style>
@@ -35,13 +32,13 @@
 						</div>
 					</div>
 					<div class="card-body p-0">
-						<b-table :items="items" 
+						<b-table :items="user.data" 
 								 :fields="usersfields" 
 								 hover responsive
 								 head-variant="dark" 
 								 foot-variant="light">
 							<template slot="index" slot-scope="data">
-								{{data.index + user.from}}
+								{{rowcount = data.index + user.from}}
 							</template>
 
 							<template slot="authority" slot-scope="data">
@@ -75,15 +72,15 @@
 									<i class="fa fa-edit blue"></i>
 								</b-link>
 								/
-								<b-link  href="#" v-b-popover.hover="'삭제'" @click="deleteUser(data.item.id)">
+								<b-link  href="#" v-b-popover.hover="'삭제'" @click="deleteUser(data.item)">
 									<i class="fa fa-trash red"></i>
 								</b-link >
 							</template>
 						</b-table>
 
 					</div>
-					<div class="card-footer text-muted text-center">
-						작업중...
+					<div class="card-footer ">
+						<pagination :data="user" @pagination-change-page="getResults" class="d-flex justify-content-center"></pagination>
 					</div>
 				</div>
 				
@@ -169,8 +166,8 @@
 		data () {
 			return {
 				// users row 값
-				items: [],
-				user:{},
+				// items: [],
+				user: {},
 				// 테이블 컬럼 설정
 				usersfields: [
 					{
@@ -217,6 +214,7 @@
 				editMode: false,
 				btnTitle: '',
 				repassword: '',
+				rowcount: 0,
 				// 모달 변수
 				form: new Form({
 					id        : '',
@@ -253,17 +251,10 @@
 					return false;
 				}
 			},
-			loadUsers(){
-				axios.get("api/user")
-					 .then(({data}) => { 
-					   this.items = data.data,
-					   this.user = data
-					  });
-			},
 			addUser(){
 				this.editMode = false;
 				this.btnTitle = "추가";
-				this.form.reset();		
+				this.form.reset();
 				this.$refs.modal.show();
 			},
 			createUser(){
@@ -271,7 +262,12 @@
 				this.form.post('api/user')
 					.then((response)=>{
 						this.$refs.modal.hide();
+						toast({
+							type: 'success',
+							title: '유저를 새로 생성하였습니다.'
+						})
 						this.$Progress.finish();
+						this.getResults();
 					}, (response) => {
 						this.$Progress.fail()
 					});
@@ -279,7 +275,7 @@
 			editUser(item){
 				this.editMode = true;
 				this.btnTitle = "변경";
-				this.form.reset();		
+				this.form.reset();
 				this.$refs.modal.show();
 				this.repassword = item.password;
 				this.form.fill (item);
@@ -290,32 +286,69 @@
 				} else {
 					this.form.pwd = null;
 				}
+				this.$Progress.start();
 				this.form.put('api/user/'+this.form.id)
 					.then(() => {
-						// success
-						console.log("변경호출");
-						this.$refs.modal.hide()
+						 swal(
+							// success
+							'변경',
+							this.form.name + '님의 내용을 변경 하였습니다.',
+							'success'
+                        )
+						this.$refs.modal.hide();
+                        this.$Progress.finish();
+						this.getResults(this.user.current_page);
 					})
 					.catch(() => {
-					
-					})
+              			this.$Progress.fail();
+            		})
 			},
-			deleteUser(userID){
-				this.form.delete('api/user/'+userID)
-					.then(() => {
-						console.log("삭제 : " + userID);
+			deleteUser(user){
+				swal({
+					title: '사용자 삭제',
+					text: user.name + "를 삭제 하겠습니다 ?",
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					cancelButtonText: '취소',
+					confirmButtonText: '삭제'
+				}).then((result) => {
+				  if (result.value) {
+						this.form.delete('api/user/'+user.id).then(() => {
+							swal(
+								'삭제!',
+								user.name + '를 삭제 하였습니다.',
+								'success'
+							)
+							
+							if(this.rowcount % this.user.per_page == 1) {
+								this.getResults(this.user.current_page -1);
+							} else {
+								this.getResults(this.user.current_page);
+							}
+							
+							
 					}).catch(()=>{
-					
+						swal("Failed!", "There was something wronge.", "warning");
 					})
+				  }
+				})
 			},			
 			handleOk (evt) {
 				// Prevent modal from closing
 				evt.preventDefault();
 				this.editMode ? this.updateUser() : this.createUser();
     		},
+			getResults(page = 1) {
+				axios.get('/api/user?page=' + page)
+					.then(response => {
+						this.user = response.data;
+					});
+			},
 		},
 		created() {
-			this.loadUsers();
+			this.getResults();
 		}
 	}
 </script>
