@@ -4,6 +4,7 @@
 /public/lrc/*.lrc
 /public/storage
 /storage/*.key
+/resources/js/components/util/PlayerComponent.vue
 /vendor
 /.idea
 /.vscode
@@ -14,4 +15,3 @@ npm-debug.log
 yarn-error.log
 .env
 .phpunit.result.cache
-.PlayerComponent.vue

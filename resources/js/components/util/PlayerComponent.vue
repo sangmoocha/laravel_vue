@@ -15,6 +15,13 @@
       return {
         audio: [
           {
+            name: '가을 아침',
+            artist: 'IU',
+            url: 'https://firebasestorage.googleapis.com/v0/b/vue-firebase-learning-33ce7.appspot.com/o/01.%20%EA%B0%80%EC%9D%84%20%EC%95%84%EC%B9%A8%20(Autumn%20morning).mp3?alt=media&token=aa8c1322-eea8-46f5-8283-319b895d7494',
+            cover: 'https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2Fed8cfcde1b3a0c6ee5e43653d3175958.600x600x1.jpg?param=300y300', // prettier-ignore
+            lrc: 'https://ivon.gonetis.com/lrc/가을아침.lrc',
+          },
+          {
             name: '비행운',
             artist: '문문',
             url: 'https://firebasestorage.googleapis.com/v0/b/fn-ivon.appspot.com/o/%EB%B9%84%ED%96%89%EC%9A%B4.mp3?alt=media&token=4d242cf6-8b44-402f-9ba0-2b73e828b0bb',
