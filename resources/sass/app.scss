@@ -1,53 +1,117 @@
-
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-// Fontawesome
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
-@import "~@fortawesome/fontawesome-free/scss/brands.scss";
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+html, body {
+  font-weight: 200;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.blue {
-  color: $blue;
+.top-left{
+  position: absolute;
+  left: 10px;
+  top: 18px;
 }
-.indigo {
-  color: $indigo;
+
+.top-right {
+  position: absolute;
+  right: 10px;
+  top: 18px;
 }
-.purple {
-  color: $purple;
+
+.links > a {
+  color:dimgrey;
+  padding: 0 25px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  text-transform: uppercase;
 }
-.pink {
-  color: $pink;
+
+.content {
+  height: 100vh;
+  background-size: cover;
 }
-.red {
-  color: $red;
+
+.welcom-img {
+  background-image:url('/img/ivon.png');
 }
-.orange {
-  color: $orange;
+
+.auth-img {
+  background-image:url('https://picsum.photos/1366/768/');
 }
-.orangered {
+
+.title {
+  position: absolute;
+  left: 30%;
+  top: 25%;
+  font-size: 3rem;
   color: orangered;
+  writing-mode: tb-rl;
 }
-.yellow {
-  color: $yellow;
+// Login Page
+.box {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0,0,0,.8);
+  padding: 30px;
+  top: 50%;
+  left: 50%;
+  min-width: 300px;
+  max-width: 500px;
+  width: 40%;
+  box-sizing: border-box;
+  box-shadow: 0, 15px, 25px, rgba(0,0,0,.5);
+  border-radius: 10px;
+  h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+  }
+  .footer{
+    padding-top: 20px;
+  }
+  .form-control {
+    height: 1.5rem;
+  }
+  .inputbox {
+    position: relative;
+    input {
+      width: 100%;
+      padding: 0 10px;
+      color: #fff;
+      margin-bottom: 2.5rem;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+    
+    label {
+      position: absolute;
+      top: -0.2rem;
+      left: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      color: #fff;
+      pointer-events: none;
+      transition: .5s;
+    }
+    strong {
+      position: absolute;
+      top: 6rem;
+      left: 0;
+      padding: 0;
+    }
+    input:focus ~ label, input:valid ~ label {
+      top: -1.8rem;
+      left: 5;
+      color: orangered;
+      font-size: 0.9rem;
+    }
+  }
 }
-.green {
-  color: $green;
-}
-.teal {
-  color: $teal;
-}
-.cyan {
-  color: $cyan;
-}
+
+

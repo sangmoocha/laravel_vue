@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="content auth-img">
+    {{-- <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
@@ -66,6 +66,50 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    <div class="box">
+        <div class="header">
+            <h2>로그인</h2>
+        </div>
+        
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="bady">
+                
+                <div class="inputbox">
+                    <input type="email" name="email" id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                    <label><i class="fas fa-envelope"> </i>{{ __(' 이메일') }}</label>
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="inputbox">
+                    <input type="password" name="password" id="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
+                    <label><i class="fas fa-unlock-alt"></i>{{ __(' 비밀번호') }}</label>
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                <label class="form-check-label blue" for="remember">
+                    {{ __('Remember Me') }}
+                </label>
+            </div>
+            <div class="footer ">
+                <button type="submit" class="btn btn-success float-right">{{ __('로그인') }}</button>
+                <a class="btn btn-outline-secondary" href="{{ route('password.request') }}">
+                    {{ __('비밀번호 찾기') }}
+                </a>
+            </div>
+            
+        </form>
+    </div> 
 </div>
 @endsection

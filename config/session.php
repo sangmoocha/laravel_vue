@@ -27,11 +27,15 @@ return [
     | to be allowed to remain idle before it expires. If you want them
     | to immediately expire on the browser closing, set that option.
     |
+    | 여기서 세션이 만료되기 전에 유휴 상태로 유지되도록 허용 할 시간 (분)을
+    | 지정할 수 있습니다. 브라우저를 닫을 때 즉시 만료되도록하려면 해당 옵션을
+    | 설정하십시오.
+    |
     */
 
     'lifetime' => env('SESSION_LIFETIME', 120),
 
-    'expire_on_close' => false,
+    'expire_on_close' => true,
 
     /*
     |--------------------------------------------------------------------------

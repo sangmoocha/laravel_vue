@@ -1,4 +1,3 @@
-
 // Body
 $body-bg: #f8fafc;
 
@@ -21,3 +20,26 @@ $cyan  : #6cb2eb;
 
 // Font Awesome 추가 
 $fa-font-path: "../webfonts";
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+// Fontawesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+// colors
+.blue      { color: $blue; }
+.indigo    { color: $indigo; }
+.purple    { color: $purple; }
+.pink      { color: $pink; }
+.red       { color: $red; }
+.orange    { color: $orange; }
+.orangered { color: orangered;}
+.yellow    { color: $yellow;}
+.green     { color: $green; }
+.teal      { color: $teal; }
+.cyan      { color: $cyan; }
