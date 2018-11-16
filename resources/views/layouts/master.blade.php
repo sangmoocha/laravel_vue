@@ -13,7 +13,7 @@
 
 	<link rel="stylesheet" href="/css/master.css">
 	{{-- Theme style --}}
-
+	
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -175,8 +175,12 @@
 			<div>
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link navbar-brand" data-widget="control-sidebar" data-slide="true" href="#">
-							<i class="fas fa-times"></i>
+						<a class="nav-link navbar-brand" 
+							data-widget="control-sidebar" 
+							data-slide="true"
+							title="숨기기"
+							href="#">
+							<i class="fas fa-arrow-right"></i>
 						</a>
 					</li>
 					<li class="nav-item text-center w-75">

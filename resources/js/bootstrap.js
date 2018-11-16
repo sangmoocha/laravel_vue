@@ -15,7 +15,6 @@ window.Popper = require('popper.js').default;
 
 try {
     window.$ = window.jQuery = require('jquery');
-
     require('bootstrap');
     // admin-lte 추가
     require('admin-lte');

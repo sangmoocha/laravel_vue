@@ -61,7 +61,6 @@ let routes = [
 	{ path: '/users', component: require('./components/auth/UsersComponent.vue') },
 ]
 
-
 const router = new VueRouter({
     mode: 'history',
     routes // `routes: routes`의 줄임

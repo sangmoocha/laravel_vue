@@ -14,12 +14,15 @@
 	.table, .pagination {
 		margin-bottom: 0rem;
 	}
+	.table-responsive {
+		min-height: 417px;
+	}
 </style>
 
 <template>
-    <div class="container pt-3">
-        <div class="row justify-content-center pt-2">
-            <div class="col-md-12">
+    <div>
+        <div class="row justify-content-center pt-3">
+            <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">
 						사용자 관리
@@ -349,6 +352,6 @@
 		},
 		created() {
 			this.getResults();
-		}
+		}		
 	}
 </script>

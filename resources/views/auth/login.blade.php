@@ -104,7 +104,7 @@
             </div>
             <div class="footer ">
                 <button type="submit" class="btn btn-success float-right">{{ __('로그인') }}</button>
-                <a class="btn btn-outline-secondary" href="{{ route('password.request') }}">
+                <a class="btn btn-outline-primary" href="{{ route('password.request') }}">
                     {{ __('비밀번호 찾기') }}
                 </a>
             </div>

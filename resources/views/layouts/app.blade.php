@@ -72,15 +72,15 @@
             </div>
         </nav> --}}
         <div class="top-left links">
-            <a href="{{ url('/') }}">Laravel</a>
+            <a href="{{ url('/') }}">처음으로</a>
         </div>
         @if (Route::has('login'))
         <div class="top-right links">
             @auth
-            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ url('/home') }}">메인페이지</a>
         @else
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('login') }}">로그인</a>
+            <a href="{{ route('register') }}">회원가입</a>
         @endauth
         </div>
         @endif

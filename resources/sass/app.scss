@@ -36,11 +36,11 @@ html, body {
 }
 
 .welcom-img {
-  background-image:url('/img/ivon.png');
+  background-image:url('/img/welcom.png');
 }
 
 .auth-img {
-  background-image:url('https://picsum.photos/1366/768/');
+  background-image:url('/img/auth.png');
 }
 
 .title {
@@ -65,7 +65,7 @@ html, body {
   box-sizing: border-box;
   box-shadow: 0, 15px, 25px, rgba(0,0,0,.5);
   border-radius: 10px;
-  h2 {
+  h2, h3, h4 {
     margin: 0 0 30px;
     padding: 0;
     color: #fff;
@@ -73,11 +73,12 @@ html, body {
   .footer{
     padding-top: 20px;
   }
-  .form-control {
-    height: 1.5rem;
-  }
+
   .inputbox {
     position: relative;
+    .form-control {
+      height: 1.5rem;
+    }
     input {
       width: 100%;
       padding: 0 10px;
