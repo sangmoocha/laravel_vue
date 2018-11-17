@@ -74,7 +74,9 @@
         </div>
     </div> --}}
     <div class="box">
-        
+        <div class="top-right links">
+            <a href="{{ url('/') }}"><i class="fas fa-times fa-2x"></i></a>
+        </div>
         <div class="header">
             <h4>{{ __('회원가입') }}</h4>
         </div>

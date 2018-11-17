@@ -57,6 +57,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 // vue router
 let routes = [
+    { path: '/home', component: require('./components/HomeComponent.vue') },
     { path: '/profile', component: require('./components/auth/ProfileComponent.vue') },
 	{ path: '/users', component: require('./components/auth/UsersComponent.vue') },
 ]

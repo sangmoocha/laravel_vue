@@ -64,7 +64,9 @@
 </div> --}}
 <div class="content auth-img">
     <div class="box">
-        
+        <div class="top-right links">
+            <a href="{{ url('/') }}"><i class="fas fa-times fa-2x"></i></a>
+        </div>
         <div class="header">
             <h4>{{ __('비밀번호 변경') }}</h4>
         </div>

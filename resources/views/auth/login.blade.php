@@ -67,7 +67,11 @@
             </div>
         </div>
     </div> --}}
+    
     <div class="box">
+        <div class="top-right links">
+            <a href="{{ url('/') }}"><i class="fas fa-times fa-2x"></i></a>
+        </div>
         <div class="header">
             <h2>로그인</h2>
         </div>

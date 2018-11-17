@@ -65,20 +65,25 @@ html, body {
   box-sizing: border-box;
   box-shadow: 0, 15px, 25px, rgba(0,0,0,.5);
   border-radius: 10px;
-  h2, h3, h4 {
-    margin: 0 0 30px;
-    padding: 0;
-    color: #fff;
+  .header{
+    h2, h3, h4 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+    }
   }
+  
   .footer{
     padding-top: 20px;
   }
 
   .inputbox {
     position: relative;
+
     .form-control {
       height: 1.5rem;
     }
+
     input {
       width: 100%;
       padding: 0 10px;
@@ -100,12 +105,14 @@ html, body {
       pointer-events: none;
       transition: .5s;
     }
+
     strong {
       position: absolute;
       top: 6rem;
       left: 0;
       padding: 0;
     }
+
     input:focus ~ label, input:valid ~ label {
       top: -1.8rem;
       left: 5;

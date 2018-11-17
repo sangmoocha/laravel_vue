@@ -71,18 +71,29 @@
                 </div>
             </div>
         </nav> --}}
-        <div class="top-left links">
-            <a href="{{ url('/') }}">처음으로</a>
-        </div>
+        
         @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-            <a href="{{ url('/home') }}">메인페이지</a>
+            
+        @auth
+            <div class="top-left links">
+                <a href="{{ url('/home') }}"><i class="fas fa-home teal"></i>{{ __(' 메인페이지') }}</a>
+            </div>
+            <div class="top-right links">
+                <a 	class="nav-link red"
+                    href="#"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('로그아웃 ') }}<i class="fas fa-power-off orangered"></i>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
         @else
-            <a href="{{ route('login') }}">로그인</a>
-            <a href="{{ route('register') }}">회원가입</a>
+            <div class="top-right links">
+                <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt green"></i>{{ __(' 로그인') }}</a>
+                <a href="{{ route('register') }}"><i class="fas fa-user-plus blue"></i>{{ __(' 회원가입') }}</a>
         @endauth
-        </div>
+            </div>
         @endif
         <main class="py-0">
             @yield('content')
