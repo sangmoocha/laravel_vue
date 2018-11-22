@@ -55,9 +55,26 @@ Vue.component('aplayer-component', require('./components/util/PlayerComponent.vu
 // laravel-vue-pagination
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+// passport
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+// .......................................................... //
 // vue router
 let routes = [
     { path: '/home', component: require('./components/HomeComponent.vue') },
+    { path: '/OAuth', component: require('./components/auth/OAuthComponent.vue') },
     { path: '/profile', component: require('./components/auth/ProfileComponent.vue') },
 	{ path: '/users', component: require('./components/auth/UsersComponent.vue') },
 ]

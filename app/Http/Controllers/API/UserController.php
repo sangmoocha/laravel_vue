@@ -11,7 +11,17 @@ use App\User;
 
 class UserController extends Controller
 {
-	/**
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -19,7 +29,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return User::latest()->paginate(7);
+        return User::latest()->paginate(5);
     }
 
     /**
